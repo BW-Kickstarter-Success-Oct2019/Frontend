@@ -38,3 +38,21 @@ export const PostLogin = (form) => dispatch => {
         })
         
 }
+
+export const START_CAMPAIGN = "START_CAMPAIGN";
+export const CAMPAIGN_SUCCESS = "CAMPAIGN_SUCCESS";
+export const CAMPAIGN_FAILURE = "CAMPAIGN_FAILURE";
+
+export const PostCampaign = (form) => dispatch => {
+    dispatch({type:START_CAMPAIGN});
+        axiosWithAuth()
+        .post("",form)
+        .then(res =>{
+            console.log("login post res",res)
+            dispatch({type:CAMPAIGN_SUCCESS})
+        })
+        .catch(err =>{
+            dispatch({type: CAMPAIGN_FAILURE, payload: err.response})
+        })
+        
+}

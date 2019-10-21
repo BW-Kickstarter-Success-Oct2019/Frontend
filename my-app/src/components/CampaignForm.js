@@ -2,38 +2,64 @@ import React, {useState, useEffect} from "react";
 import {axiosWithAuth} from "../utils/axiosWithAuth";
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
+import { Form, Field, withFormik } from "formik";
+import * as Yup from "yup";
+import {PostCampaign} from "../actions"
 
 const CampaignForm = () => {
-    const [form, setForm] = useState({name:"", description:"", goal:"", country:"", duration:"", category:""});
+    // const [form, setForm] = useState({name:"", description:"", goal:"", country:"", duration:"", category:""});
 
-    const handleChanges = e => {
-        setForm({...form, [e.target.name] : e.target.value})
-    };
+    // const handleChanges = e => {
+    //     setForm({...form, [e.target.name] : e.target.value})
+    // };
 
-    const handleSubmit = e => {
-        e.preventDefault();
+    // const handleSubmit = e => {
+    //     e.preventDefault();
         
-    }
+    // }
 
     return (
-        <form onSubmit={handleSubmit}>
-                <input type="text" name="name" value={form.name} onChange={handleChanges} placeholder="name..."></input>
+        <Form>
+                <Field type="text" name="name"  placeholder="name..."/>
 
-                <input type="text" name="description" value={form.description} onChange={handleChanges} placeholder="description..."></input>
+                <Field type="text" name="description" placeholder="description..."/>
 
-                <input type="password" name="goal" value={form.goal} onChange={handleChanges} placeholder="goal..."></input>
+                <Field type="password" name="goal"  placeholder="goal..."/>
 
-                <input type="password" name="country" value={form.country} onChange={handleChanges} placeholder="country..."></input>
+                <Field type="password" name="country"  placeholder="country..."/>
 
-                <input type="password" name="duration" value={form.duration} onChange={handleChanges} placeholder="duration..."></input>
+                <Field type="password" name="duration" placeholder="duration..."/>
 
-                <input type="password" name="category" value={form.category} onChange={handleChanges} placeholder="category..."></input>
+                <Field type="password" name="category" placeholder="category..."/>
 
                 <button type="submit">add Campaign</button>
-                
-                
-            </form>
+            </Form>
     );
 };
 
-export default CampaignForm
+const FormikCampaignForm = withFormik({
+    mapPropsToValues({name,description,goal,country,duration,category,PostCampaign}){
+        return{
+            name: name || "",
+            description: description || "",
+            goal: goal || "",
+            country: country || "",
+            duration: duration || "",
+            category: category || "",
+            PostCampaign : PostCampaign
+        }
+    },
+    handleSubmit(values){
+        values.PostCampaign({name: values.name, description: values.description, goal:values.goal,country:values.country,duration:values.duration,category:values.category})
+    }
+})(CampaignForm)
+
+const mapStateToProps = state =>{
+    return {
+        isPosting: state.re.isPosting,
+        error: state.re.error
+    }
+}
+
+export default connect(mapStateToProps,{PostCampaign})(FormikCampaignForm)
+

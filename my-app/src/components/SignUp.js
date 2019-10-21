@@ -1,37 +1,53 @@
 import React, {useState, useEffect} from "react";
 import {axiosWithAuth} from "../utils/axiosWithAuth"
-import { PostSignUp } from "../actions/Actions";
+import { PostSignUp } from "../actions";
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
+import { Form, Field, withFormik } from "formik";
+import * as Yup from "yup";
 
 const SignUp = () => {
-    const [form, setForm] = useState({email:"", username:"", password:""});
+    // const [form, setForm] = useState({email:"", username:"", password:""});
 
-    const handleChanges = e => {
-        setForm({...form, [e.target.name] : e.target.value})
-    };
+    // const handleChanges = e => {
+    //     setForm({...form, [e.target.name] : e.target.value})
+    // };
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        PostSignUp(form)
-    }
+    // const handleSubmit = e => {
+    //     e.preventDefault();
+    //     PostSignUp(form)
+    // }
 
     return(
         <div>
-            <form onSubmit={handleSubmit}>
-                <input type="email" name="email" value={form.email} onChange={handleChanges} placeholder="email..."></input>
+            <Form>
+                <Field type="email" name="email"  placeholder="email..."/>
 
-                <input type="text" name="username" value={form.username} onChange={handleChanges} placeholder="username..."></input>
+                <Field type="text" name="username" placeholder="username..."/>
 
-                <input type="password" name="password" value={form.password} onChange={handleChanges} placeholder="password..."></input>
+                <Field type="password" name="password"  placeholder="password..."/>
 
                 <button type="submit">SignUp!</button>
                 <p>Already have an account?</p>
                 <Link to="/login">Login Instead</Link>
-            </form>
+            </Form>
         </div>
     );
 };
+
+const FormikSignUp = withFormik({
+    mapPropsToValues({email,username,password,PostSignUp}){
+        return{
+            email: email || "",
+            username: username || "",
+            password: password || "",
+            PostSignUp : PostSignUp
+        }
+    },
+    handleSubmit(values){
+        values.PostSignUp({email:values.email, username: values.username, password:values.password})
+    }
+})(SignUp)
 
 const mapStateToProps = state =>{
     return {
@@ -40,4 +56,4 @@ const mapStateToProps = state =>{
     }
 }
 
-export default connect(mapStateToProps,{PostSignUp})(SignUp)
+export default connect(mapStateToProps,{PostSignUp})(FormikSignUp)
