@@ -1,10 +1,12 @@
+
+/* *{
+  border:1px solid green
+} * */
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
 
 .App-header {
   background-color: #282c34;
@@ -17,6 +19,53 @@
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.form-parent{
+  display:flex;
+  flex-flow:column;
+}
+
+.field-style{
+  border:none;
+  padding:1%;
+  border:1px lightgrey solid;
+  border-radius: 5px;
+  width:20%;
+  
+}
+
+.field-style:hover{
+  border:1px black solid;
+}
+
+.field-style-child:hover{
+  border-color:black;
+}
+
+.field-style-child{
+  border:none;
+  padding:5%;
+  width:80%;
+  border:1px lightgrey solid;
+  border-radius: 5px;
+  
+  
+}
+
+
+.submit-buttons{
+  border:none;
+  background:none;
+  border:1px solid green;
+  border-radius: 5px;
+  background:green;
+  color:white;
+  font-size:1rem;
+  padding:.5% 5%;
+  box-shadow:1px 3px 5px grey;
+  margin-bottom:1%;
+}
+
+.submit-buttons:hover{
+  box-shadow:1px 3px 10px grey;
+  border-color:dark-green
 }

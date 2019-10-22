@@ -5,6 +5,11 @@ import {connect} from "react-redux";
 import { Form, Field, withFormik} from "formik";
 import * as Yup from "yup";
 import {PostLogin} from "../actions"
+import styled from 'styled-components'
+
+const FieldContain = styled.div`
+    margin-bottom:1%;
+`;
 
 const Login = () => {
     // const [form, setForm] = useState({username:"", password:""});
@@ -25,15 +30,21 @@ const Login = () => {
 
     return(
         <div>
-            <Form >
-                <Field type="text" name="username" placeholder="username"/>
-
-                <Field type="password" name="password" placeholder="password" />
-
-                <button type="submit">Login!</button>
-                <p>Need to create an account?</p>
-                <Link to="/signup">Signup Instead</Link>
-            </Form>
+            <h1>Login</h1>
+            <div>
+                <Form >
+                    <FieldContain>
+                        <Field className="field-style" type="text" name="username" placeholder="username"/>
+                    </FieldContain>
+                    <FieldContain>
+                        <Field className="field-style" type="password" name="password" placeholder="password" />
+                    </FieldContain>
+                    <div>
+                        <button className="submit-buttons" type="submit">Login!</button>
+                    </div>
+                    <Link to="/signup">Need to create an account? Signup Instead</Link>
+                </Form>
+            </div>
         </div>
     );
 };
