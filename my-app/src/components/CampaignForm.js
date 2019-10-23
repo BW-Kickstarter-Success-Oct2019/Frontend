@@ -150,7 +150,7 @@ const CampaignForm = ({errors,touched,value}) => {
                     </Category>
                 </DurCate>
                 <div>
-                    <button className="submit-buttons"type="submit">add Campaign</button>
+                    <button className="submit-buttons"type="submit">Add Campaign</button>
                 </div>
                     
                     

@@ -8,8 +8,8 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -131,7 +131,7 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <ExitToAppIcon />
         </IconButton>
         <p>Sign Out</p>
       </MenuItem>
@@ -142,9 +142,23 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
+        <img src={process.env.PUBLIC_URL + '/logo.svg'} height='100px' /> 
           <Typography className={classes.title} variant="h6" noWrap>
-            Kick Starter Success 
+            Kick Starter Success | Dash Board
           </Typography>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}> 
             <IconButton
@@ -156,7 +170,7 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               {/* <Typography>User Name</Typography> */}
-              <AccountCircle />
+              <ExitToAppIcon />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>

@@ -7,6 +7,7 @@ import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
 import styled from 'styled-components'
 import '../App.css';
+import NavBar from "./NavBar";
 
 
 const FieldContain = styled.div`
@@ -27,6 +28,7 @@ const SignUp = () => {
 
     return(
         <div>
+            <NavBar/>
             <h1>Sign Up</h1>
             <div>   
                 <Form>
@@ -62,8 +64,10 @@ const FormikSignUp = withFormik({
             PostSignUp : PostSignUp
         }
     },
-    handleSubmit(values){
-        values.PostSignUp({email:values.email, username: values.username, password:values.password})
+    handleSubmit(values,props){
+        console.log("values",values)
+        console.log("props",props)
+        values.PostSignUp({email:values.email, username: values.username, password:values.password}, props)
     }
 })(SignUp)
 

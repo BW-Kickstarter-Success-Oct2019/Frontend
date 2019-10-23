@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import {connect} from "react-redux";
 import { Form, Field, withFormik} from "formik";
 import * as Yup from "yup";
-import {PostLogin} from "../actions"
-import styled from 'styled-components'
+import {PostLogin} from "../actions";
+import styled from 'styled-components';
+import NavBar from "./NavBar";
 
 const FieldContain = styled.div`
     margin-bottom:1%;
@@ -30,6 +31,7 @@ const Login = () => {
 
     return(
         <div>
+            <NavBar/>
             <h1>Login</h1>
             <div>
                 <Form >
@@ -57,8 +59,10 @@ const Login = () => {
                 PostLogin:PostLogin
             }
         },
-        handleSubmit(values){
-            values.PostLogin({username: values.username, password:values.password})
+        handleSubmit(values, props){
+            console.log("values",values)
+            console.log("props",props)
+            values.PostLogin({username: values.username, password:values.password}, props)
         }
     })(Login)
 
