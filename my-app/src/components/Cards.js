@@ -44,7 +44,7 @@ export default function RecipeReviewCard() {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+// pass ID into vert button 
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -54,6 +54,7 @@ export default function RecipeReviewCard() {
             <VertButton /> 
           }
       />   
+      {/* id={props.campaign.id} */}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           blurb

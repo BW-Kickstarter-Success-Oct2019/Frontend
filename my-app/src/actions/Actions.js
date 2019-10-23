@@ -53,9 +53,10 @@ export const PostCampaign = (form) => dispatch => {
         axiosWithAuth()
         .post(`/restricted/campaigns`,form)
         .then(res =>{
+            dispatch({type:CAMPAIGN_SUCCESS, payload:res.data})
             console.log("post campaign post res",res)
             history.push("/dashboard")
-            dispatch({type:CAMPAIGN_SUCCESS, payload:res})
+            
         })
         .catch(err =>{
             dispatch({type: CAMPAIGN_FAILURE, payload: err.response})
@@ -70,7 +71,7 @@ export const UPDATE_FAILURE = "UPDATE_FAILURE";
 // export const UpdateCampaign = (form) => dispatch => {
 //     dispatch({type:UPDATE_CAMPAIGN});
 //         axiosWithAuth()
-//         .post(`/restricted/campaigns/${}`,form)
+//         .put(`/restricted/campaigns/${}`,form)
 //         .then(res =>{
 //             console.log("Update Campaign res",res)
 //             history.push("/dashboard")
@@ -89,7 +90,7 @@ export const DELETE_FAILURE = "DELETE_FAILURE";
 // export const DeleteCampaign = (form) => dispatch => {
 //     dispatch({type:DELETE_CAMPAIGN});
 //         axiosWithAuth()
-//         .post(`/restricted/campaigns/${}`,form)
+//         .delete(`/restricted/campaigns/${}`,form)
 //         .then(res =>{
 //             console.log("delete Campaign res",res)
 //             history.push("/dashboard")

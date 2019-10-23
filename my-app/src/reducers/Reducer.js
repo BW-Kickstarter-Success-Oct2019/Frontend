@@ -3,12 +3,15 @@ import { START_SIGNUP,SIGNUP_SUCCESS,SIGNUP_FAILURE,START_LOGIN,LOGIN_SUCCESS,LO
 
     const initialState = {
         isPosting: false,
+        isUpdating:false,
+        isDeleting:false,
         campaign: [],
         error:"",
 
     };
 
     export const Reducer = (state = initialState, action) => {
+        console.log("state",state)
         switch(action.type) {
             case START_SIGNUP:
                 return{
@@ -51,7 +54,8 @@ import { START_SIGNUP,SIGNUP_SUCCESS,SIGNUP_FAILURE,START_LOGIN,LOGIN_SUCCESS,LO
                 return{
                     ...state,
                     isPosting:false,
-                    campaign: [...state.campaign, action.payload]
+                    campaign: [...state.campaign, action.payload],
+                    error:""
                 }
             case CAMPAIGN_FAILURE:
                     return{
@@ -62,4 +66,5 @@ import { START_SIGNUP,SIGNUP_SUCCESS,SIGNUP_FAILURE,START_LOGIN,LOGIN_SUCCESS,LO
             default:
                 return state
         }
+        
     }
