@@ -90,9 +90,9 @@ const CampaignForm = ({errors,touched,value}) => {
                 <Country>
                         <Field className="field-style-child" component="select" name="country">
                                 <option>Choose your country...</option>
-                                <option value="US">US</option>
-                                <option value="NZ">NZ</option>
-                                <option value="CA">CA</option>
+                                <option value="us">US</option>
+                                <option value="nz">NZ</option>
+                                <option value="ca">CA</option>
                                 <option value="GB">GB</option>
                                 <option value="SE">SE</option>
                                 <option value="DK">DK</option>
@@ -184,10 +184,10 @@ const FormikCampaignForm = withFormik({
     }),
 
 
-    handleSubmit(values){
+    handleSubmit(values,props){
         values.PostCampaign({name: values.name, blurb: values.description, goal:values.goal,
         country:values.country,
-        duration:values.duration,category:values.category})
+        duration:values.duration,category:values.category}, props)
     }
 })(CampaignForm)
 

@@ -24,7 +24,7 @@ import { START_SIGNUP,SIGNUP_SUCCESS,SIGNUP_FAILURE,START_LOGIN,LOGIN_SUCCESS,LO
                 }
             case START_LOGIN:
                 return{
-                    isPosting:false,
+                    isPosting:true,
                 }
             case LOGIN_SUCCESS:
                 return{
@@ -36,7 +36,7 @@ import { START_SIGNUP,SIGNUP_SUCCESS,SIGNUP_FAILURE,START_LOGIN,LOGIN_SUCCESS,LO
                 }
             case START_CAMPAIGN:
                 return{
-                    isPosting:false,
+                    isPosting:true,
                 }
             case CAMPAIGN_SUCCESS:
                 return{
