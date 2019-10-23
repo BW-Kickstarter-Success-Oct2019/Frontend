@@ -1,13 +1,13 @@
 import React from 'react'
 import NavBar from './NavBar'
-import AddCampaign from './AddCampaign'
+import AddButton from './AddButton'
 import Cards from './Cards'
 
 const DashBoard = () => {
     return (
         <content >
             <NavBar />
-            <AddCampaign />
+            <AddButton />
             <Cards />
         </content>
     );
