@@ -12,10 +12,11 @@ function App() {
   return (
     <div className="App">
       {/* <Route path="/" component={NavBar}/> */}
-      <Route path="/login" component={Login}/>
+      <Route exact path="/" component={Login}/>
       <Route path="/signup" component={SignUp}/>
       <PrivateRoute path="/dashboard" component={DashBoard}/>
       <PrivateRoute path="/addCampaign" component={CampaignForm}/>
+      <PrivateRoute path="/edit-campaign/:id"/>
     </div>
   );
 }

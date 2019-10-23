@@ -80,40 +80,40 @@ const CampaignForm = ({errors,touched,value}) => {
                 </MarginDiv>
                 <GoalCountry>
                     <Goal>
-                            <Field className="field-style-child" type="number" name="goal"  placeholder="$goal"/>
-                                {touched.goal && errors.goal && (
-                            <ErrMsg className="error">{errors.goal}</ErrMsg>
+                        <Field className="field-style-child" type="number" name="goal"  placeholder="$goal"/>
+                            {touched.goal && errors.goal && (
+                        <ErrMsg className="error">{errors.goal}</ErrMsg>
                         )}
                     </Goal>
                     
                 
                 <Country>
-                        <Field className="field-style-child" component="select" name="country">
-                                <option>Choose your country...</option>
-                                <option value="us">US</option>
-                                <option value="nz">NZ</option>
-                                <option value="ca">CA</option>
-                                <option value="GB">GB</option>
-                                <option value="SE">SE</option>
-                                <option value="DK">DK</option>
-                                <option value="IT">IT</option>
-                                <option value="DE">DE</option>
-                                <option value="AU">AU</option>
-                                <option value="FR">FR</option>
-                                <option value="IE">IE</option>
-                                <option value="CH">CH</option>
-                                <option value="ES">ES</option>
-                                <option value="BE">BE</option>
-                                <option value="NL">NL</option>
-                                <option value="MX">MX</option>
-                                <option value="JP">JP</option>
-                                <option value="HK">HK</option>
-                                <option value="AT">AT</option>
-                                <option value="SG">SG</option>
-                                <option value="NO">NO</option>
-                                <option value="LU">LU</option>
-                            </Field>
-                            {touched.country && errors.country && (
+                    <Field className="field-style-child" component="select" name="country">
+                        <option>Choose your country...</option>
+                        <option value="us">US</option>
+                        <option value="nz">NZ</option>
+                        <option value="ca">CA</option>
+                        <option value="GB">GB</option>
+                        <option value="SE">SE</option>
+                        <option value="DK">DK</option>
+                        <option value="IT">IT</option>
+                        <option value="DE">DE</option>
+                        <option value="AU">AU</option>
+                        <option value="FR">FR</option>
+                        <option value="IE">IE</option>
+                        <option value="CH">CH</option>
+                        <option value="ES">ES</option>
+                        <option value="BE">BE</option>
+                        <option value="NL">NL</option>
+                        <option value="MX">MX</option>
+                        <option value="JP">JP</option>
+                        <option value="HK">HK</option>
+                        <option value="AT">AT</option>
+                        <option value="SG">SG</option>
+                        <option value="NO">NO</option>
+                        <option value="LU">LU</option>
+                    </Field>
+                        {touched.country && errors.country && (
                         <ErrMsg className="error">{errors.country}</ErrMsg>
                         )}
                     </Country>
@@ -127,23 +127,23 @@ const CampaignForm = ({errors,touched,value}) => {
                     </Duration>
                     <Category>
                         <Field className="field-style-child" component="select" name="category">
-                                <option>Choose a category...</option>
-                                <option value="art">art</option>
-                                <option value="comics">comics</option>
-                                <option value="crafts">crafts</option>
-                                <option value="dance">dance</option>
-                                <option value="design">design</option>
-                                <option value="fashion">fashion</option>
-                                <option value="film/video">film/video</option>
-                                <option value="food">food</option>
-                                <option value="games">games</option>
-                                <option value="journalism">journalism</option>
-                                <option value="music">music</option>
-                                <option value="photography">photography</option>
-                                <option value="publishing">publishing</option>
-                                <option value="technology">technology</option>
-                                <option value="theater">theater</option>
-                            </Field>
+                            <option>Choose a category...</option>
+                            <option value="art">art</option>
+                            <option value="comics">comics</option>
+                            <option value="crafts">crafts</option>
+                            <option value="dance">dance</option>
+                            <option value="design">design</option>
+                            <option value="fashion">fashion</option>
+                            <option value="film/video">film/video</option>
+                            <option value="food">food</option>
+                            <option value="games">games</option>
+                            <option value="journalism">journalism</option>
+                            <option value="music">music</option>
+                            <option value="photography">photography</option>
+                            <option value="publishing">publishing</option>
+                            <option value="technology">technology</option>
+                            <option value="theater">theater</option>
+                        </Field>
                             {touched.category && errors.category && (
                         <ErrMsg className="error">{errors.category}</ErrMsg>
                     )}
@@ -176,7 +176,7 @@ const FormikCampaignForm = withFormik({
 
     validationSchema:Yup.object().shape({
         name:Yup.string().required("Must include campaign name"),
-        blurb:Yup.string().required("Must include description"),
+        blurb:Yup.string().required("Must include blurb"),
         goal:Yup.string().required("Must include goal"),
         country:Yup.string().required("Must include country"),
         duration:Yup.string().required("Must include duration"),
@@ -184,10 +184,10 @@ const FormikCampaignForm = withFormik({
     }),
 
 
-    handleSubmit(values,props){
-        values.PostCampaign({name: values.name, blurb: values.description, goal:values.goal,
+    handleSubmit(values){
+        values.PostCampaign({name: values.name, blurb: values.blurb, goal:values.goal,
         country:values.country,
-        duration:values.duration,category:values.category}, props)
+        duration:values.duration,category:values.category})
     }
 })(CampaignForm)
 

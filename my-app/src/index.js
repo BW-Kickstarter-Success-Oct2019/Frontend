@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter as Router} from "react-router-dom";
+import {Router} from "react-router-dom";
+import history from './components/history';
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import {createStore , applyMiddleware} from "redux";
@@ -13,7 +14,7 @@ import rootReducer from "./reducers";
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
+        <Router history={history}>
             <App />
         </Router>
     </Provider>
