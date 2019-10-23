@@ -37,7 +37,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -45,19 +46,27 @@ export default function RecipeReviewCard() {
     setExpanded(!expanded);
   };
 // pass ID into vert button 
+console.log("card prop", props)
   return (
-    <Card className={classes.card}>
-      <CardHeader
+    
+    <>
+    
+    {props.campaigns.map(campaign => (
+      // <p>{campaign.blurb}</p>
+      
+      <div key={campaign.id}>
+    <Card  className={classes.card}>
+      <CardHeader 
         className="cardHeader"
-        title="name"
+        title={campaign.name}
         action={
-            <VertButton /> 
+            <VertButton id={campaign.id}/> 
           }
       />   
       {/* id={props.campaign.id} */}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          blurb
+          {campaign.blurb}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -76,19 +85,24 @@ export default function RecipeReviewCard() {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            goal: $$$
+          goal:  {campaign.goal}
           </Typography>
           <Typography paragraph>
-            country: country
+          country:  {campaign.country}
           </Typography>
           <Typography paragraph>
-            duration: duration
+          duration: {campaign.duration}
           </Typography>
           <Typography>
-            category: category names
+            category: {campaign.category} 
           </Typography>
         </CardContent>
       </Collapse>
     </Card>
+    </div>
+    ) )}
+    
+    </>
   );
+  
 }

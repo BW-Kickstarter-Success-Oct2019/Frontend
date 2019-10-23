@@ -7,7 +7,7 @@ import history from '../components/history';
 
 
 const SimpleMenu = (props) => {
-    console.log("vertbutton props",props)
+    // console.log("vertbutton props",props)
     // const item = props.campaign.find(
     //     thing => `${thing.id}` === props.match.
     // )

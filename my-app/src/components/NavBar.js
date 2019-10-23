@@ -10,6 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import history from '../components/history';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -92,6 +93,8 @@ export default function PrimarySearchAppBar() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+    localStorage.removeItem("token");
+    history.push("/")
   };
 
   const handleMobileMenuOpen = event => {

@@ -12,7 +12,13 @@ const FieldContain = styled.div`
     margin-bottom:1%;
 `;
 
-const Login = () => {
+const ErrMsg = styled.p`
+    color:grey;
+    padding:0;
+    margin:0;
+`;
+
+const Login = ({touched,errors}) => {
     // const [form, setForm] = useState({username:"", password:""});
 
     // const handleChanges = e => {
@@ -37,9 +43,15 @@ const Login = () => {
                 <Form >
                     <FieldContain>
                         <Field className="field-style" type="text" name="username" placeholder="username"/>
+                        {touched.username && errors.username && (
+                    <ErrMsg className="error">{errors.username}</ErrMsg>
+                )}
                     </FieldContain>
                     <FieldContain>
                         <Field className="field-style" type="password" name="password" placeholder="password" />
+                        {touched.password && errors.password && (
+                    <ErrMsg className="error">{errors.password}</ErrMsg>
+                )}
                     </FieldContain>
                     <div>
                         <button className="submit-buttons" type="submit">Login!</button>
@@ -59,9 +71,13 @@ const Login = () => {
                 PostLogin:PostLogin
             }
         },
+        validationSchema:Yup.object().shape({
+            username:Yup.string().required("Must include username"),
+            password:Yup.string().required("Must include password"),
+        }),
         handleSubmit(values, props){
-            console.log("values",values)
-            console.log("props",props)
+            // console.log("values",values)
+            // console.log("props",props)
             values.PostLogin({username: values.username, password:values.password}, props)
         }
     })(Login)

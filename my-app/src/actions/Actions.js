@@ -33,10 +33,11 @@ export const PostLogin = (form) => dispatch => {
         axiosWithAuth()
         .post("/user/login",form)
         .then(res =>{
+            dispatch({type:LOGIN_SUCCESS})
             console.log("login post res",res)
             localStorage.setItem("token", res.data.token )
             history.push("/dashboard")
-            dispatch({type:LOGIN_SUCCESS})
+            
         })
         .catch(err =>{
             dispatch({type: LOGIN_FAILURE, payload: err.response})

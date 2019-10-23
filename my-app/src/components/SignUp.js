@@ -13,8 +13,13 @@ import NavBar from "./NavBar";
 const FieldContain = styled.div`
     margin-bottom:1%;
 `;
+const ErrMsg = styled.p`
+    color:grey;
+    padding:0;
+    margin:0;
+`;
 
-const SignUp = () => {
+const SignUp = ({touched, errors}) => {
     // const [form, setForm] = useState({email:"", username:"", password:""});
 
     // const handleChanges = e => {
@@ -34,12 +39,21 @@ const SignUp = () => {
                 <Form>
                     <FieldContain>
                         <Field className="field-style" type="email" name="email"  placeholder="email..."/>
+                        {touched.email && errors.email && (
+                    <ErrMsg className="error">{errors.email}</ErrMsg>
+                )}
                     </FieldContain>
                     <FieldContain>
                         <Field className="field-style" type="text" name="username" placeholder="username..."/>
+                        {touched.username && errors.username && (
+                    <ErrMsg className="error">{errors.username}</ErrMsg>
+                )}
                     </FieldContain>
                     <FieldContain>
                         <Field className="field-style" type="password" name="password"  placeholder="password..."/>
+                        {touched.password && errors.password && (
+                    <ErrMsg className="error">{errors.password}</ErrMsg>
+                )}
                     </FieldContain>
                     
 
@@ -48,7 +62,7 @@ const SignUp = () => {
                         <button className="submit-buttons" type="submit">SignUp!</button>
                     </div>
                     
-                    <Link to="/login">Already have an account? Login Instead</Link>
+                    <Link to="/">Already have an account? Login Instead</Link>
                 </Form>
             </div>
         </div>
@@ -64,6 +78,11 @@ const FormikSignUp = withFormik({
             PostSignUp : PostSignUp
         }
     },
+    validationSchema:Yup.object().shape({
+        email:Yup.string().required("Must include email"),
+        username:Yup.string().required("Must include username"),
+        password:Yup.string().required("Must include password"),
+    }),
     handleSubmit(values,props){
         console.log("values",values)
         console.log("props",props)
