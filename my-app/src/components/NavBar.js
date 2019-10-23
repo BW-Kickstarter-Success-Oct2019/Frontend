@@ -142,9 +142,9 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-        <img src={process.env.PUBLIC_URL + '/logo.svg'} height='100px' /> 
-          <Typography className={classes.title} variant="h6" noWrap>
-            Kick Starter Success | Dash Board
+        <img src={process.env.PUBLIC_URL + '/logo.svg'} height='150px' /> 
+          <Typography className={classes.title} variant="h5" noWrap>
+            Kick Starter Success | Dash Board | Username
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -169,8 +169,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              {/* <Typography>User Name</Typography> */}
-              <ExitToAppIcon />
+              <ExitToAppIcon fontSize="large"/>
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>

@@ -9,9 +9,9 @@ import CampaignForm from "./components/CampaignForm";
 function App() {
   return (
     <div className="App">
-      <Route path="/dashboard" component={dashboard}/>
       <Route path="/login" component={Login}/>
       <Route path="/signup" component={SignUp}/>
+      <Route path="/dashboard" component={dashboard}/>
       <Route path="/addCampaign" component={CampaignForm}/>
     </div>
   );
