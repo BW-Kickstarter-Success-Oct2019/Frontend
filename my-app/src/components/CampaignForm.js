@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import {PostCampaign} from "../actions";
 import styled from 'styled-components';
 import history from '../components/history';
+import NavBar from "../components/NavBar"
 
 const MarginDiv = styled.div`
 margin-bottom:1%;
@@ -51,6 +52,7 @@ const ErrMsg = styled.p`
 `;
 
 const CampaignForm = ({errors,touched,value}) => {
+    
     // const [form, setForm] = useState({name:"", description:"", goal:"", country:"", duration:"", category:""});
 
     // const handleChanges = e => {
@@ -65,6 +67,8 @@ const CampaignForm = ({errors,touched,value}) => {
         history.push("/dashboard")
     }
     return (
+        <>
+        <NavBar/>
         <div>
             <h1>Add Your Campaign</h1>
             <div>
@@ -164,6 +168,7 @@ const CampaignForm = ({errors,touched,value}) => {
                 </Form>
                 </div>
             </div>
+            </>
     );
 };
 
