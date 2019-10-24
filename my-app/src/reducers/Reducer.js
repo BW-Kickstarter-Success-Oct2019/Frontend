@@ -1,11 +1,13 @@
 
-import {GET_CAMPAIGN, CAMPAIGN_SUCCESS, CAMPAIGN_FAILURE, START_SIGNUP,SIGNUP_SUCCESS,SIGNUP_FAILURE,START_LOGIN,LOGIN_SUCCESS,LOGIN_FAILURE,POST_CAMPAIGN,POST_SUCCESS,POST_FAILURE, UPDATE_CAMPAIGN,UPDATE_SUCCESS, UPDATE_FAILURE, DELETE_CAMPAIGN, DELETE_SUCCESS, DELETE_FAILURE } from "../actions";
+import {GET_CAMPAIGN, CAMPAIGN_SUCCESS, CAMPAIGN_FAILURE,GET_USER,USER_SUCCESS,USER_FAILURE, START_SIGNUP,SIGNUP_SUCCESS,SIGNUP_FAILURE,START_LOGIN,LOGIN_SUCCESS,LOGIN_FAILURE,POST_CAMPAIGN,POST_SUCCESS,POST_FAILURE, UPDATE_CAMPAIGN,UPDATE_SUCCESS, UPDATE_FAILURE, DELETE_CAMPAIGN, DELETE_SUCCESS, DELETE_FAILURE } from "../actions";
+
 
     const initialState = {
         isPosting: false,
         isUpdating:false,
         isDeleting:false,
         campaign: [],
+        user:[],
         error:"",
 
     };
@@ -49,6 +51,20 @@ import {GET_CAMPAIGN, CAMPAIGN_SUCCESS, CAMPAIGN_FAILURE, START_SIGNUP,SIGNUP_SU
                     campaign: action.payload
                 }
             case CAMPAIGN_FAILURE:
+                return{
+                    ...state,
+                    error:action.payload
+                }
+            case GET_USER:
+                return{
+                    ...state,
+                }
+            case USER_SUCCESS:
+                return{
+                    ...state,
+                    user: action.payload
+                }
+            case USER_FAILURE:
                 return{
                     ...state,
                     error:action.payload

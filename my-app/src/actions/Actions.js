@@ -21,6 +21,26 @@ export const GetCampaign = () => dispatch => {
 }
 
 
+export const GET_USER = "GET_USER";
+export const USER_SUCCESS = "USER_SUCCESS";
+export const USER_FAILURE = "USER_FAILURE";
+export const GetUser = () => dispatch => {
+    dispatch({type:GET_USER});
+        axiosWithAuth()
+        .get("/user/restricted")
+        .then(res =>{
+            dispatch({type: USER_SUCCESS, payload:res.data})
+            console.log("get user res", res);
+            
+            
+        })
+        .catch(err =>{
+            dispatch({type: USER_FAILURE, payload: err.response})
+        })
+        
+}
+
+
 
 
 export const START_SIGNUP = "START_SIGNUP";
