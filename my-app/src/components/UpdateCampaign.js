@@ -6,6 +6,7 @@ import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
 import {UpdateCampaign} from "../actions";
 import styled from 'styled-components';
+import history from '../components/history';
 
 const MarginDiv = styled.div`
 margin-bottom:1%;
@@ -50,7 +51,7 @@ const ErrMsg = styled.p`
 `;
 
 const UpdateForm = (props, {errors,touched,values}) => {
-    console.log("UPFRM Props",props)
+    // console.log("UPFRM Props",props)
     const initialState = {
         name:"",
         blurb:"",
@@ -66,7 +67,7 @@ console.log("updateItem", updateItem)
         axiosWithAuth()
         .get(`/restricted/campaigns/${props.match.params.id}`)
         .then(res =>{
-            console.log("get byid res", res);
+            // console.log("get byid res", res);
             setUpdateItem(res.data);
         })
     },[])
@@ -79,7 +80,11 @@ console.log("updateItem", updateItem)
         e.preventDefault();
         
         
-        props.UpdateCampaign(updateItem,props.match.params.id)
+        props.UpdateCampaign(updateItem,props.match.params.id,redirect)
+
+    } 
+    const redirect = () => {
+        history.push("/dashboard")
     }
 
     return (

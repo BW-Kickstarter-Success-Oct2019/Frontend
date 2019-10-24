@@ -1,18 +1,40 @@
 import {axiosWithAuth} from "../utils/axiosWithAuth";
 import history from '../components/history';
 
+export const GET_CAMPAIGN = "GET_CAMPAIGN";
+export const CAMPAIGN_SUCCESS = "CAMPAIGN_SUCCESS";
+export const CAMPAIGN_FAILURE = "CAMPAIGN_FAILURE";
+export const GetCampaign = () => dispatch => {
+    dispatch({type:GET_CAMPAIGN});
+        axiosWithAuth()
+        .get("/restricted/campaigns")
+        .then(res =>{
+            dispatch({type: CAMPAIGN_SUCCESS, payload:res.data})
+            console.log("get res", res);
+            // setCampaigns(res.data);
+            
+        })
+        .catch(err =>{
+            dispatch({type: CAMPAIGN_FAILURE, payload: err.response})
+        })
+        
+}
+
+
+
+
 export const START_SIGNUP = "START_SIGNUP";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAILURE = "SIGNUP_FAILURE";
-
 export const PostSignUp = (form) => dispatch => {
     dispatch({type:START_SIGNUP});
         axiosWithAuth()
         .post("/user/register", form)
         .then(res =>{
-            console.log("signup post res", res)
-            History.push("/")
             dispatch({type: SIGNUP_SUCCESS})
+            console.log("signup post res", res)
+            history.push("/")
+            
             
         })
         .catch(err =>{
@@ -46,21 +68,21 @@ export const PostLogin = (form) => dispatch => {
 }
 
 export const POST_CAMPAIGN = "POST_CAMPAIGN";
-export const CAMPAIGN_SUCCESS = "CAMPAIGN_SUCCESS";
-export const CAMPAIGN_FAILURE = "CAMPAIGN_FAILURE";
+export const POST_SUCCESS = "POST_SUCCESS";
+export const POST_FAILURE = "POST_FAILURE";
 
 export const PostCampaign = (form) => dispatch => {
     dispatch({type:POST_CAMPAIGN});
         axiosWithAuth()
         .post(`/restricted/campaigns`,form)
         .then(res =>{
-            dispatch({type:CAMPAIGN_SUCCESS, payload:res.data})
-            console.log("post campaign post res",res)
+            dispatch({type:POST_SUCCESS, payload:res.data})
+            console.log("post campaign  res",res)
             history.push("/dashboard")
             
         })
         .catch(err =>{
-            dispatch({type: CAMPAIGN_FAILURE, payload: err.response})
+            dispatch({type: POST_FAILURE, payload: err.response})
         })
         
 }
@@ -69,18 +91,19 @@ export const UPDATE_CAMPAIGN = "UPDATE_CAMPAIGN";
 export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
 export const UPDATE_FAILURE = "UPDATE_FAILURE";
 
-export const UpdateCampaign = (form, id) => dispatch => {
+export const UpdateCampaign = (form, id, redirect) => dispatch => {
     console.log("UPCPM ID", id)
     dispatch({type:UPDATE_CAMPAIGN});
         axiosWithAuth()
         .put(`/restricted/campaigns/${id}`,form)
         .then(res =>{
-            console.log("Update Campaign res",res)
-            history.push("/dashboard")
-            dispatch({type:CAMPAIGN_SUCCESS})
+            dispatch({type:UPDATE_SUCCESS, payload:res.data})
+            console.log("Update Campaign res",res.data)
+            redirect();
+            
         })
         .catch(err =>{
-            dispatch({type: CAMPAIGN_FAILURE, payload: err.response})
+            dispatch({type: UPDATE_FAILURE, payload: err.response})
         })
 }
 
@@ -95,9 +118,10 @@ export const DeleteCampaign = (id) => dispatch => {
         axiosWithAuth()
         .delete(`/restricted/campaigns/${id}`)
         .then(res =>{
+            dispatch({type:DELETE_SUCCESS, payload:res.data})
             console.log("delete Campaign res",res)
-            history.push("/dashboard")
-            dispatch({type:DELETE_SUCCESS})
+            
+            
         })
         .catch(err =>{
             dispatch({type: DELETE_FAILURE, payload: err.response})

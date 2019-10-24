@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 
 
 const SimpleMenu = (props) => {
-    console.log("vertbutton props",props)
+    // console.log("vertbutton props",props)
 
     // const initialState = {
     //     name:"",
@@ -50,7 +50,7 @@ const SimpleMenu = (props) => {
 
     const handleDelete = () => {
         props.DeleteCampaign(props.id)
-        history.push("/dashboard")
+        
         };
 
     const handleEdits = () => {

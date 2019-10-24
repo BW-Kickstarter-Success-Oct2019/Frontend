@@ -63,7 +63,7 @@ export default function RecipeReviewCard(props) {
             <VertButton id={campaign.id}/> 
           }
       />   
-      {/* id={props.campaign.id} */}
+      
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {campaign.blurb}
@@ -101,8 +101,8 @@ export default function RecipeReviewCard(props) {
     </Card>
     </div>
     ) )}
-    
-    </>
+
+    </> 
   );
   
 }
