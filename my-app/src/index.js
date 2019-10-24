@@ -10,13 +10,16 @@ import thunk from "redux-thunk";
 import {createStore , applyMiddleware} from "redux";
 import rootReducer from "./reducers";
 import {logger} from "redux-logger"
+import { IntlProvider } from "react-intl";
 
     const store = createStore(rootReducer, applyMiddleware(thunk,logger));
 
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <App />
+            <IntlProvider locale="en">
+                <App />
+            </IntlProvider>
         </Router>
     </Provider>
 , document.getElementById('root'));
