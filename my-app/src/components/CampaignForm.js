@@ -6,6 +6,7 @@ import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
 import {PostCampaign} from "../actions";
 import styled from 'styled-components';
+import history from '../components/history';
 
 const MarginDiv = styled.div`
 margin-bottom:1%;
@@ -60,7 +61,9 @@ const CampaignForm = ({errors,touched,value}) => {
     //     e.preventDefault();
         
     // }
-
+    const redirect = () => {
+        history.push("/dashboard")
+    }
     return (
         <div>
             <h1>Add Your Campaign</h1>
@@ -151,6 +154,9 @@ const CampaignForm = ({errors,touched,value}) => {
                 </DurCate>
                 <div>
                     <button className="submit-buttons"type="submit">Add Campaign</button>
+                </div>
+                <div>
+                <button onClick={() => redirect()} className="submit-buttons">Go back </button>
                 </div>
                     
                     
