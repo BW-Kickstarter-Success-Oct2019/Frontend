@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react'
+import {axiosWithAuth} from "../utils/axiosWithAuth"
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,6 +8,26 @@ import history from '../components/history';
 
 
 const SimpleMenu = (props) => {
+
+    const initialState = {
+        name:"",
+        blurb:"",
+        goal:"",
+        country:"",
+        duration:"",
+        category:""
+    }
+
+    const [current, setCurrent] = useState(initialState);
+// console.log("current", current)
+    useEffect(() => {
+        axiosWithAuth()
+        .get(`/restricted/campaigns/${props.id}`)
+        .then(res =>{
+            // console.log("get byid res", res);
+            setCurrent(res.data);
+        })
+    },[])
     // console.log("vertbutton props",props)
     // const item = props.campaign.find(
     //     thing => `${thing.id}` === props.match.
@@ -24,9 +45,9 @@ const SimpleMenu = (props) => {
     
     };
 
-    // const handleEdits = () => {
-    //     history.push(`/edit-campaign/${props.id}`)
-    //     };
+    const handleEdits = () => {
+        history.push(`/edit-campaign/${props.id}`)
+        };
 
     return (
         <div>
@@ -41,7 +62,7 @@ const SimpleMenu = (props) => {
             onClose={handleClose}
         >
 
-            <MenuItem onClick={handleClose}>Edit</MenuItem>
+            <MenuItem onClick={handleEdits}>Edit</MenuItem>
             <MenuItem onClick={handleClose}>Delete</MenuItem>
         </Menu>
     </div>

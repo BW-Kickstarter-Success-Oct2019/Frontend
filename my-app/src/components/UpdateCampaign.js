@@ -49,21 +49,31 @@ const ErrMsg = styled.p`
     margin:0;
 `;
 
-const CampaignForm = ({errors,touched,value}) => {
-    // const [form, setForm] = useState({name:"", description:"", goal:"", country:"", duration:"", category:""});
+const CampaignForm = (props, {errors,touched,value}) => {
+    
+    const initialState = {
+        name:"",
+        blurb:"",
+        goal:"",
+        country:"",
+        duration:"",
+        category:""
+    }
 
-    // const handleChanges = e => {
-    //     setForm({...form, [e.target.name] : e.target.value})
-    // };
-
-    // const handleSubmit = e => {
-    //     e.preventDefault();
-        
-    // }
+    const [updateItem, setUpdateItem] = useState(initialState);
+console.log("updateItem", updateItem)
+    useEffect(() => {
+        axiosWithAuth()
+        .get(`/restricted/campaigns/${props.match.params.id}`)
+        .then(res =>{
+            console.log("get byid res", res);
+            setUpdateItem(res.data);
+        })
+    },[])
 
     return (
         <div>
-            <h1>Add Your Campaign</h1>
+            <h1>Update Your Campaign</h1>
             <div>
             <Form className="form-parent">
                 <MarginDiv>
@@ -150,7 +160,7 @@ const CampaignForm = ({errors,touched,value}) => {
                     </Category>
                 </DurCate>
                 <div>
-                    <button className="submit-buttons"type="submit">Add Campaign</button>
+                    <button className="submit-buttons"type="submit">Update Campaign</button>
                 </div>
                     
                     
@@ -185,9 +195,7 @@ const FormikCampaignForm = withFormik({
 
 
     handleSubmit(values){
-        values.PostCampaign({name: values.name, blurb: values.blurb, goal:values.goal,
-        country:values.country,
-        duration:values.duration,category:values.category})
+        
     }
 })(CampaignForm)
 
