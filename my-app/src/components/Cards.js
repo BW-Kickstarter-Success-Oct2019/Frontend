@@ -86,16 +86,16 @@ export default function RecipeReviewCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-          goal:  {"$" + campaign.goal}
+          Goal:  {"$" + campaign.goal}
           </Typography>
           <Typography paragraph>
-          country:  {campaign.country}
+          Country:  {campaign.country}
           </Typography>
           <Typography paragraph>
-          duration: {campaign.duration + " days"}
+          Duration: {campaign.duration + " days"}
           </Typography>
           <Typography>
-            category: {campaign.category} 
+            Category: {campaign.category} 
           </Typography>
           <Typography paragraph>
             Success Rate: <FormattedNumber style="percent" value={campaign.success} minimumFractionDigits={2}/>
