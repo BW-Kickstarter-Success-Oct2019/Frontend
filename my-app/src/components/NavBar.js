@@ -119,6 +119,7 @@ const  PrimarySearchAppBar = (props) => {
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
+  console.log("nav props 2", props)
   const renderMobileMenu = (
     <>
     {/* {props.users.map(user => ( */}
@@ -131,7 +132,7 @@ const  PrimarySearchAppBar = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {/* <p>{user.name}</p> */}
+      
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -179,7 +180,7 @@ const  PrimarySearchAppBar = (props) => {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              {/* <Typography>User Name</Typography> */}
+              {/* <Typography>{props.users.username}</Typography> */}
               <ExitToAppIcon />
             </IconButton>
           </div>

@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import {UpdateCampaign} from "../actions";
 import styled from 'styled-components';
 import history from '../components/history';
+import NavBar from "../components/NavBar"
 
 const MarginDiv = styled.div`
 margin-bottom:1%;
@@ -51,6 +52,7 @@ const ErrMsg = styled.p`
 `;
 
 const UpdateForm = (props, {errors,touched,values}) => {
+    
     // console.log("UPFRM Props",props)
     const initialState = {
         name:"",
@@ -88,6 +90,8 @@ console.log("updateItem", updateItem)
     }
 
     return (
+        <>
+        <NavBar/>
         <div>
             <h1>Update Your Campaign</h1>
             <div>
@@ -187,6 +191,7 @@ console.log("updateItem", updateItem)
                 </form>
                 </div>
             </div>
+            </>
     );
 };
 
