@@ -5,9 +5,12 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import history from '../components/history';
+import {DeleteCampaign} from "../actions";
+import {connect} from "react-redux";
 
 
 const SimpleMenu = (props) => {
+    console.log("vertbutton props",props)
 
     // const initialState = {
     //     name:"",
@@ -45,6 +48,11 @@ const SimpleMenu = (props) => {
     
     };
 
+    const handleDelete = () => {
+        props.DeleteCampaign(props.id)
+        history.push("/dashboard")
+        };
+
     const handleEdits = () => {
         history.push(`/edit-campaign/${props.id}`)
         };
@@ -63,16 +71,16 @@ const SimpleMenu = (props) => {
         >
 
             <MenuItem onClick={handleEdits}>Edit</MenuItem>
-            <MenuItem onClick={handleClose}>Delete</MenuItem>
+            <MenuItem onClick={handleDelete}>Delete</MenuItem>
         </Menu>
     </div>
     );
 };
 
-// const mapStateToProps = state => {
-//     return{
-//         campaign: state.re.campaign
-//     };
-// };
+const mapStateToProps = state => {
+    return{
+        campaign: state.re.campaign
+    };
+};
 
-export default SimpleMenu
+export default connect(mapStateToProps,{DeleteCampaign})(SimpleMenu)

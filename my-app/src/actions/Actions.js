@@ -89,16 +89,17 @@ export const DELETE_CAMPAIGN = "DELETE_CAMPAIGN";
 export const DELETE_SUCCESS = "DELETE_SUCCESS";
 export const DELETE_FAILURE = "DELETE_FAILURE";
 
-// export const DeleteCampaign = (form) => dispatch => {
-//     dispatch({type:DELETE_CAMPAIGN});
-//         axiosWithAuth()
-//         .delete(`/restricted/campaigns/${}`,form)
-//         .then(res =>{
-//             console.log("delete Campaign res",res)
-//             history.push("/dashboard")
-//             dispatch({type:DELETE_SUCCESS})
-//         })
-//         .catch(err =>{
-//             dispatch({type: DELETE_FAILURE, payload: err.response})
-//         })
-// }
+export const DeleteCampaign = (id) => dispatch => {
+    console.log("delete id",id)
+    dispatch({type:DELETE_CAMPAIGN});
+        axiosWithAuth()
+        .delete(`/restricted/campaigns/${id}`)
+        .then(res =>{
+            console.log("delete Campaign res",res)
+            history.push("/dashboard")
+            dispatch({type:DELETE_SUCCESS})
+        })
+        .catch(err =>{
+            dispatch({type: DELETE_FAILURE, payload: err.response})
+        })
+}
