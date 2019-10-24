@@ -9,25 +9,25 @@ import history from '../components/history';
 
 const SimpleMenu = (props) => {
 
-    const initialState = {
-        name:"",
-        blurb:"",
-        goal:"",
-        country:"",
-        duration:"",
-        category:""
-    }
+    // const initialState = {
+    //     name:"",
+    //     blurb:"",
+    //     goal:"",
+    //     country:"",
+    //     duration:"",
+    //     category:""
+    // }
 
-    const [current, setCurrent] = useState(initialState);
+    // const [current, setCurrent] = useState(initialState);
 // console.log("current", current)
-    useEffect(() => {
-        axiosWithAuth()
-        .get(`/restricted/campaigns/${props.id}`)
-        .then(res =>{
-            // console.log("get byid res", res);
-            setCurrent(res.data);
-        })
-    },[])
+    // useEffect(() => {
+    //     axiosWithAuth()
+    //     .get(`/restricted/campaigns/${props.id}`)
+    //     .then(res =>{
+    //         // console.log("get byid res", res);
+    //         setCurrent(res.data);
+    //     })
+    // },[])
     // console.log("vertbutton props",props)
     // const item = props.campaign.find(
     //     thing => `${thing.id}` === props.match.

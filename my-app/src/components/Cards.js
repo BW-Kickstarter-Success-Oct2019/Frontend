@@ -46,7 +46,7 @@ export default function RecipeReviewCard(props) {
     setExpanded(!expanded);
   };
 // pass ID into vert button 
-console.log("card prop", props)
+// console.log("card prop", props)
   return (
     
     <>

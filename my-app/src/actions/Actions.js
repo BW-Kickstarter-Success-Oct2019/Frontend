@@ -69,19 +69,20 @@ export const UPDATE_CAMPAIGN = "UPDATE_CAMPAIGN";
 export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
 export const UPDATE_FAILURE = "UPDATE_FAILURE";
 
-// export const UpdateCampaign = (form) => dispatch => {
-//     dispatch({type:UPDATE_CAMPAIGN});
-//         axiosWithAuth()
-//         .put(`/restricted/campaigns/${}`,form)
-//         .then(res =>{
-//             console.log("Update Campaign res",res)
-//             history.push("/dashboard")
-//             dispatch({type:CAMPAIGN_SUCCESS})
-//         })
-//         .catch(err =>{
-//             dispatch({type: CAMPAIGN_FAILURE, payload: err.response})
-//         })
-// }
+export const UpdateCampaign = (form, id) => dispatch => {
+    console.log("UPCPM ID", id)
+    dispatch({type:UPDATE_CAMPAIGN});
+        axiosWithAuth()
+        .put(`/restricted/campaigns/${id}`,form)
+        .then(res =>{
+            console.log("Update Campaign res",res)
+            history.push("/dashboard")
+            dispatch({type:CAMPAIGN_SUCCESS})
+        })
+        .catch(err =>{
+            dispatch({type: CAMPAIGN_FAILURE, payload: err.response})
+        })
+}
 
 
 export const DELETE_CAMPAIGN = "DELETE_CAMPAIGN";

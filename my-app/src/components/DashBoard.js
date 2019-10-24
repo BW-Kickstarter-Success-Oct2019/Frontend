@@ -9,12 +9,12 @@ import AddButton from "./AddButton"
 
 const DashBoard = () => {
     const [campaigns, setCampaigns] = useState([])
-    console.log("campainff",campaigns);
+    // console.log("campainff",campaigns);
     useEffect(() => {
         axiosWithAuth()
         .get("/restricted/campaigns")
         .then(res =>{
-            console.log("get res", res);
+            // console.log("get res", res);
             setCampaigns(res.data);
         })
     },[]);
