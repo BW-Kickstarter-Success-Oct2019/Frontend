@@ -178,6 +178,9 @@ console.log("updateItem", updateItem)
                 <div>
                     <button className="submit-buttons"type="submit">Update Campaign</button>
                 </div>
+                <div>
+                <button onClick={() => redirect()} className="submit-buttons">Go back </button>
+                </div>
                     
                     
                     

@@ -11,6 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import history from '../components/history';
+import {connect} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -74,7 +75,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+const  PrimarySearchAppBar = (props) => {
+  console.log("nav props",  props)
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -118,6 +120,8 @@ export default function PrimarySearchAppBar() {
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
+    <>
+    {/* {props.users.map(user => ( */}
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -127,6 +131,7 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      {/* <p>{user.name}</p> */}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -139,6 +144,8 @@ export default function PrimarySearchAppBar() {
         <p>Sign Out</p>
       </MenuItem>
     </Menu>
+    {/* ))} */}
+    </>
   );
 
   return (
@@ -149,7 +156,7 @@ export default function PrimarySearchAppBar() {
           <Typography className={classes.title} variant="h6" noWrap>
             Kick Starter Success | Dash Board
           </Typography>
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -161,7 +168,7 @@ export default function PrimarySearchAppBar() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}> 
             <IconButton
@@ -194,3 +201,6 @@ export default function PrimarySearchAppBar() {
     </div>
   );
 }
+
+
+export default PrimarySearchAppBar 

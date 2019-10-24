@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import VertButton from './VertButton';
+import { FormattedNumber } from "react-intl";
 
 
 const useStyles = makeStyles(theme => ({
@@ -85,16 +86,19 @@ export default function RecipeReviewCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-          goal:  {campaign.goal}
+          goal:  {"$" + campaign.goal}
           </Typography>
           <Typography paragraph>
           country:  {campaign.country}
           </Typography>
           <Typography paragraph>
-          duration: {campaign.duration}
+          duration: {campaign.duration + " days"}
           </Typography>
           <Typography>
             category: {campaign.category} 
+          </Typography>
+          <Typography paragraph>
+            Success Rate: <FormattedNumber style="percent" value={campaign.success} minimumFractionDigits={2}/>
           </Typography>
         </CardContent>
       </Collapse>
