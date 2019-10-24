@@ -121,7 +121,7 @@ const  PrimarySearchAppBar = (props) => {
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <>
-    {props.users.map(user => (
+    {/* {props.users.map(user => ( */}
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -131,7 +131,7 @@ const  PrimarySearchAppBar = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <p>{user.name}</p>
+      {/* <p>{user.name}</p> */}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -144,7 +144,7 @@ const  PrimarySearchAppBar = (props) => {
         <p>Sign Out</p>
       </MenuItem>
     </Menu>
-    ))}
+    {/* ))} */}
     </>
   );
 
