@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import { Link } from "react-router-dom";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
-import {PostCampaign} from "../actions";
+import {UpdateCampaign} from "../actions";
 import styled from 'styled-components';
 import history from '../components/history';
 import NavBar from "../components/NavBar"
@@ -51,41 +51,74 @@ const ErrMsg = styled.p`
     margin:0;
 `;
 
-const CampaignForm = ({errors,touched,value}) => {
+const UpdateForm = (props, {errors,touched,values}) => {
     
+    // console.log("UPFRM Props",props)
+    const initialState = {
+        name:"",
+        blurb:"",
+        goal:"",
+        country:"",
+        duration:"",
+        category:""
+    }
+
+    const [updateItem, setUpdateItem] = useState(initialState);
+console.log("updateItem", updateItem)
+    useEffect(() => {
+        axiosWithAuth()
+        .get(`/restricted/campaigns/${props.match.params.id}`)
+        .then(res =>{
+            // console.log("get byid res", res);
+            setUpdateItem(res.data);
+        })
+    },[])
+
+    const handleChange = e =>{
+        setUpdateItem({...updateItem, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmit = e =>{
+        e.preventDefault();
+        
+        
+        props.UpdateCampaign(updateItem,props.match.params.id,redirect)
+
+    } 
     const redirect = () => {
         history.push("/dashboard")
     }
+
     return (
         <>
         <NavBar/>
         <div>
-            <h1>Add Your Campaign</h1>
+            <h1>Update Your Campaign</h1>
             <div>
-            <Form className="form-parent">
+            <form onSubmit={handleSubmit} className="form-parent">
                 <MarginDiv>
-                    <Field className="field-style" type="text" name="name"  placeholder="name of campaign"/>
-                        {touched.name && errors.name && (
-                    <ErrMsg className="error">{errors.name}</ErrMsg>
-                )}
+                    <input onChange={handleChange} value={updateItem.name} className="field-style" type="text" name="name"  placeholder="name of campaign"/>
+                        {/* {touched.name && errors.name && (
+                    <ErrMsg className="error">{errors.name}</ErrMsg> 
+                )} */}
                 </MarginDiv>
                 <MarginDiv>
-                    <Field className="field-style" type="text" name="blurb" placeholder="description"/>
-                    {touched.blurb && errors.blurb && (
-                <ErrMsg className="error">{errors.blurb}</ErrMsg>
-            )}
+                    <input onChange={handleChange} value={updateItem.blurb} className="field-style" type="text" name="blurb" placeholder="description"/>
+                    {/* {touched.blurb && errors.blurb && (
+                <ErrMsg className="error">{errors.blurb}</ErrMsg> */}
+            {/* )} */}
                 </MarginDiv>
                 <GoalCountry>
                     <Goal>
-                        <Field className="field-style-child" type="number" name="goal"  placeholder="$goal"/>
-                            {touched.goal && errors.goal && (
+                        <input onChange={handleChange} value={updateItem.goal} className="field-style-child" type="number" name="goal"  placeholder="$goal"/>
+                            {/* {touched.goal && errors.goal && (
                         <ErrMsg className="error">{errors.goal}</ErrMsg>
-                        )}
+                        // )} */}
                     </Goal>
                     
                 
                 <Country>
-                    <Field className="field-style-child" component="select" name="country">
+                    <select onChange={handleChange} value={updateItem.country} className="field-style-child"  name="country">
                         <option>Choose your country...</option>
                         <option value="us">US</option>
                         <option value="nz">NZ</option>
@@ -109,21 +142,21 @@ const CampaignForm = ({errors,touched,value}) => {
                         <option value="SG">SG</option>
                         <option value="NO">NO</option>
                         <option value="LU">LU</option>
-                    </Field>
-                        {touched.country && errors.country && (
+                    </select>
+                        {/* {touched.country && errors.country && (
                         <ErrMsg className="error">{errors.country}</ErrMsg>
-                        )}
+                        )} */}
                     </Country>
                 </GoalCountry>
                 <DurCate>
                     <Duration>
-                        <Field className="field-style-child" type="number" name="duration" placeholder="duration in days"/>
-                        {touched.duration && errors.duration && (
-                    <ErrMsg className="error">{errors.duration}</ErrMsg>
-                )}
+                        <input onChange={handleChange} value={updateItem.duration} className="field-style-child" type="number" name="duration" placeholder="duration in days"/>
+                        {/* {touched.duration && errors.duration && (
+                    <ErrMsg className="error">{errors.duration}</ErrMsg> 
+                )}*/}
                     </Duration>
                     <Category>
-                        <Field className="field-style-child" component="select" name="category">
+                        <select onChange={handleChange} value={updateItem.category} className="field-style-child"  name="category">
                             <option>Choose a category...</option>
                             <option value="art">art</option>
                             <option value="comics">comics</option>
@@ -140,14 +173,14 @@ const CampaignForm = ({errors,touched,value}) => {
                             <option value="publishing">publishing</option>
                             <option value="technology">technology</option>
                             <option value="theater">theater</option>
-                        </Field>
-                            {touched.category && errors.category && (
+                        </select>
+                            {/* { touched.category && errors.category && (
                         <ErrMsg className="error">{errors.category}</ErrMsg>
-                    )}
+                    )} */}
                     </Category>
                 </DurCate>
                 <div>
-                    <button className="submit-buttons"type="submit">Add Campaign</button>
+                    <button className="submit-buttons"type="submit">Update Campaign</button>
                 </div>
                 <div>
                 <button onClick={() => redirect()} className="submit-buttons">Go back </button>
@@ -155,42 +188,44 @@ const CampaignForm = ({errors,touched,value}) => {
                     
                     
                     
-                </Form>
+                </form>
                 </div>
             </div>
             </>
     );
 };
 
-const FormikCampaignForm = withFormik({
-    mapPropsToValues({name,blurb,goal,country,duration,category,PostCampaign}){
-        return{
-            name: name || "",
-            blurb: blurb || "",
-            goal: goal || "",
-            country: country || "",
-            duration: duration || "",
-            category: category || "",
-            PostCampaign : PostCampaign
-        }
-    },
+// const FormikUpdateForm = withFormik({
+//     mapPropsToValues({name,blurb,goal,country,duration,category,UpdateCampaign}){
+//         return{
+//             name: name || "",
+//             blurb: blurb || "",
+//             goal: goal || "",
+//             country: country || "",
+//             duration: duration || "",
+//             category: category || "",
+//             UpdateCampaign : UpdateCampaign
+//         }
+//     },
 
-    validationSchema:Yup.object().shape({
-        name:Yup.string().required("Must include campaign name"),
-        blurb:Yup.string().required("Must include blurb"),
-        goal:Yup.string().required("Must include goal"),
-        country:Yup.string().required("Must include country"),
-        duration:Yup.string().required("Must include duration"),
-        category:Yup.string().required("Must include category")
-    }),
+//     validationSchema:Yup.object().shape({
+//         name:Yup.string().required("Must include campaign name"),
+//         blurb:Yup.string().required("Must include blurb"),
+//         goal:Yup.string().required("Must include goal"),
+//         country:Yup.string().required("Must include country"),
+//         duration:Yup.string().required("Must include duration"),
+//         category:Yup.string().required("Must include category")
+//     }),
 
 
-    handleSubmit(values){
-        values.PostCampaign({name: values.name, blurb: values.blurb, goal:values.goal,
-        country:values.country,
-        duration:values.duration,category:values.category})
-    }
-})(CampaignForm)
+//     handleSubmit(values,props){
+//         console.log("values",values)
+//         console.log("props",props)
+//         values.UpdateCampaign({name: values.name, blurb: values.blurb, goal:values.goal,
+//             country:values.country,
+//             duration:values.duration,category:values.category},props.match.params.id)
+//     }
+// })(UpdateForm)
 
 const mapStateToProps = state =>{
     return {
@@ -199,5 +234,4 @@ const mapStateToProps = state =>{
     }
 }
 
-export default connect(mapStateToProps,{PostCampaign})(FormikCampaignForm)
-
+export default connect(mapStateToProps,{UpdateCampaign})(UpdateForm)

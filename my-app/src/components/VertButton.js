@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react'
+import {axiosWithAuth} from "../utils/axiosWithAuth"
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import history from '../components/history';
+import {DeleteCampaign} from "../actions";
+import {connect} from "react-redux";
 
-export default function SimpleMenu() {
+const SimpleMenu = (props) => {
+
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = event => {
@@ -13,7 +18,17 @@ export default function SimpleMenu() {
 
     const handleClose = () => {
     setAnchorEl(null);
+    
     };
+
+    const handleDelete = () => {
+        props.DeleteCampaign(props.id)
+        
+        };
+
+    const handleEdits = () => {
+        history.push(`/edit-campaign/${props.id}`)
+        };
 
     return (
         <div>
@@ -27,9 +42,18 @@ export default function SimpleMenu() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
         >
-            <MenuItem onClick={handleClose}>Edit</MenuItem>
-            <MenuItem onClick={handleClose}>Delete</MenuItem>
+
+            <MenuItem onClick={handleEdits}>Edit</MenuItem>
+            <MenuItem onClick={handleDelete}>Delete</MenuItem>
         </Menu>
     </div>
     );
 };
+
+const mapStateToProps = state => {
+    return{
+        campaign: state.re.campaign
+    };
+};
+
+export default connect(mapStateToProps,{DeleteCampaign})(SimpleMenu)

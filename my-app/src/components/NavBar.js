@@ -4,12 +4,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import history from '../components/history';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -73,7 +72,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+const  PrimarySearchAppBar = (props) => {
+  console.log("nav props",  props)
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -92,6 +92,8 @@ export default function PrimarySearchAppBar() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+    localStorage.removeItem("token");
+    history.push("/")
   };
 
   const handleMobileMenuOpen = event => {
@@ -114,7 +116,10 @@ export default function PrimarySearchAppBar() {
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
+  console.log("nav props 2", props)
   const renderMobileMenu = (
+    <>
+    {/* {props.users.map(user => ( */}
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -124,6 +129,7 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -136,29 +142,18 @@ export default function PrimarySearchAppBar() {
         <p>Sign Out</p>
       </MenuItem>
     </Menu>
+    {/* ))} */}
+    </>
   );
 
   return (
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-        <img src={process.env.PUBLIC_URL + '/logo.svg'} height='150px' /> 
-          <Typography className={classes.title} variant="h5" noWrap>
-            Kick Starter Success | Dash Board | Username
+        <img src={process.env.PUBLIC_URL + '/logo.svg'} height='100px' /> 
+          <Typography className={classes.title} variant="h6" noWrap>
+            Kick Starter Success | Dash Board
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}> 
             <IconButton
@@ -169,7 +164,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <ExitToAppIcon fontSize="large"/>
+              <ExitToAppIcon />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
@@ -190,3 +185,6 @@ export default function PrimarySearchAppBar() {
     </div>
   );
 }
+
+
+export default PrimarySearchAppBar 

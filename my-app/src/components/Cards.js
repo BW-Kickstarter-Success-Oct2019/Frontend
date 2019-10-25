@@ -8,20 +8,17 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import VertButton from './VertButton';
+import { FormattedNumber } from "react-intl";
 
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    width: '30%',
     maxHeight: 600,
+    margin: '25px 25px'
   },
-//   media: {
-//     height: 0,
-//     paddingTop: '56.25%', // 16:9
-//   },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -32,31 +29,34 @@ const useStyles = makeStyles(theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
   return (
-    <Card className={classes.card}>
-      <CardHeader
+    
+    <>
+    
+    {props.campaigns.map(campaign => (
+      
+    <Card  className={classes.card}>
+      <CardHeader 
         className="cardHeader"
-        title="name"
+        title={campaign.name}
         action={
-            <VertButton /> 
+            <VertButton id={campaign.id}/> 
           }
       />   
+      
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          blurb
+          {campaign.blurb}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -75,19 +75,26 @@ export default function RecipeReviewCard() {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            goal: $$$
+          Goal:  {"$" + campaign.goal}
           </Typography>
           <Typography paragraph>
-            country: country
+          Country:  {campaign.country}
           </Typography>
           <Typography paragraph>
-            duration: duration
+          Duration: {campaign.duration + " days"}
           </Typography>
           <Typography>
-            category: category names
+            Category: {campaign.category} 
+          </Typography>
+          <Typography paragraph>
+            Success Rate: <FormattedNumber style="percent" value={campaign.success} minimumFractionDigits={2}/>
           </Typography>
         </CardContent>
       </Collapse>
     </Card>
+    ) )}
+
+    </> 
   );
+  
 }

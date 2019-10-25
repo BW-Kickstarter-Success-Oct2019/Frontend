@@ -3,18 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter as Router} from "react-router-dom";
+import {Router} from "react-router-dom";
+import history from './components/history';
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import {createStore , applyMiddleware} from "redux";
 import rootReducer from "./reducers";
+import {logger} from "redux-logger"
+import { IntlProvider } from "react-intl";
 
-    const store = createStore(rootReducer, applyMiddleware(thunk));
+    const store = createStore(rootReducer, applyMiddleware(thunk,logger));
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
-            <App />
+        <Router history={history}>
+            <IntlProvider locale="en">
+                <App />
+            </IntlProvider>
         </Router>
     </Provider>
 , document.getElementById('root'));
