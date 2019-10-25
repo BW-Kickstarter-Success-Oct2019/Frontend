@@ -5,7 +5,10 @@
 
 .App {
   text-align: center;
+  
 }
+
+
 
 
 .App-header {
@@ -17,6 +20,13 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.cards-container {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
 }
 
 .form-parent{
