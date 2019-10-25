@@ -23,7 +23,9 @@ const DashBoard = (props) => {
         <content >
             <NavBar users={props.user} />
             <AddButton/>
-            <Cards campaigns={props.campaign} />
+            <div className="cards-container">
+                <Cards campaigns={props.campaign} />
+            </div>
         </content>
     );
 };

@@ -16,8 +16,9 @@ import { FormattedNumber } from "react-intl";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    width: '30%',
     maxHeight: 600,
+    margin: '25px 0px'
   },
 //   media: {
 //     height: 0,
@@ -55,7 +56,6 @@ export default function RecipeReviewCard(props) {
     {props.campaigns.map(campaign => (
       // <p>{campaign.blurb}</p>
       
-      <div key={campaign.id}>
     <Card  className={classes.card}>
       <CardHeader 
         className="cardHeader"
@@ -103,7 +103,6 @@ export default function RecipeReviewCard(props) {
         </CardContent>
       </Collapse>
     </Card>
-    </div>
     ) )}
 
     </> 
